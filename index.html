@@ -138,21 +138,44 @@
     <!-- Footer / Legal -->
     <footer class="py-12 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-gray-400 text-sm">
+            <div class="text-gray-400 text-sm text-center md:text-left">
                 &copy; 2026 Cyrex (Developer: PAYNUL ALI). Educational 18+ paper trading simulator &mdash; all balances and prizes are 100% virtual.
             </div>
-            <div class="flex flex-wrap justify-center gap-6 text-sm">
+            <div class="flex flex-wrap md:flex-nowrap items-center justify-center gap-6 text-sm whitespace-nowrap">
                 <a href="https://cyrex-29575.firebaseapp.com/privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
                 <a href="https://cyrex-29575.firebaseapp.com/terms.html" class="text-gray-400 hover:text-white transition">Terms of Service</a>
                 <a href="https://cyrex-29575.firebaseapp.com/delete-account.html" class="text-gray-400 hover:text-white transition">Delete Account</a>
-                <a href="mailto:gamearcade199@gmail.com" class="text-gray-400 hover:text-white transition">Contact Support</a>
+                <button type="button" onclick="openSupportModal()" class="text-gray-400 hover:text-white transition cursor-pointer bg-transparent border-0 p-0">Contact Support</button>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-6 mt-8 text-center">
-            <!-- AdMob Verification Link (Invisible but present for crawlers if needed) -->
-            <a href="/app-ads.txt" class="text-xs text-gray-800 hover:text-gray-700">app-ads.txt</a>
-        </div>
     </footer>
+
+    <!-- Support Modal (WEB-002: works on desktop browsers without a default mailto client) -->
+    <div id="supportModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm px-4" onclick="if(event.target===this)closeSupportModal()">
+        <div class="glass max-w-md w-full rounded-2xl p-6 border border-white/15 bg-[#0d1117]">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-lg font-bold text-white">Contact Cyrex Support</h3>
+                <button type="button" onclick="closeSupportModal()" aria-label="Close" class="text-gray-400 hover:text-white text-xl leading-none bg-transparent border-0 cursor-pointer">&times;</button>
+            </div>
+            <p class="text-sm text-gray-400 mb-4">Questions, account requests, or bug reports? Reach us directly at:</p>
+            <div class="flex items-center justify-between gap-2 bg-black/60 border border-white/10 rounded-xl px-4 py-3 mb-4">
+                <span class="text-sm font-mono text-white select-all">gamearcade199@gmail.com</span>
+                <button type="button" id="copyEmailBtn" onclick="copySupportEmail()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition cursor-pointer border-0">Copy</button>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <a href="https://mail.google.com/mail/?view=cm&amp;to=gamearcade199@gmail.com&amp;su=Cyrex%20Support" target="_blank" rel="noopener" class="text-center px-4 py-2.5 rounded-xl bg-white text-black text-sm font-semibold hover:bg-gray-200 transition">Compose in Gmail</a>
+                <a href="mailto:gamearcade199@gmail.com?subject=Cyrex%20Support" class="text-center px-4 py-2.5 rounded-xl glass text-white text-sm font-semibold hover:bg-white/10 transition">Open Mail App</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openSupportModal(){document.getElementById('supportModal').classList.remove('hidden');}
+        function closeSupportModal(){document.getElementById('supportModal').classList.add('hidden');}
+        function copySupportEmail(){
+            var btn=document.getElementById('copyEmailBtn');
+            if(navigator.clipboard){navigator.clipboard.writeText('gamearcade199@gmail.com').then(function(){btn.textContent='Copied!';setTimeout(function(){btn.textContent='Copy';},2000);});}
+        }
+    </script>
 
 </body>
 
